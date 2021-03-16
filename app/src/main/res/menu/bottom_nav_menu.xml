@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/FeedFragment"
+        android:title="Feed"
+        android:icon="@drawable/ic_books" />
+
+
+
+    <item android:id="@+id/MessagesFragment"
+        android:title="Messages"
+        android:icon="@drawable/ic_messenger" />
+
+    <item android:id="@+id/placeholder"
+        android:title="" />
+
+    <item android:id="@+id/NotificationFragment"
+        android:title="Notifications"
+        android:icon="@drawable/ic_notification" />
+
+    <item android:id="@+id/ProfileFragment"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile" />
+</menu>
