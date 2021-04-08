@@ -21,6 +21,7 @@ class FeedsFragment : BaseVmFragment<FeedsViewModel>(FeedsViewModel::class.java)
 
     }
 
+
     override fun getLayoutResId(): View {
         binding = FeedsFragmentBinding.inflate(layoutInflater)
         return binding.root

@@ -3,9 +3,15 @@ package com.example.booksdonationapp.presentation.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ClickableSpan
+import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -13,13 +19,15 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.booksdonationapp.R
 
 fun <T> LiveData<T>.reObserve(owner: LifecycleOwner , observer: Observer<T>){
     removeObserver(observer)
@@ -114,4 +122,66 @@ fun Activity.hideSystemUI() {
         @Suppress("DEPRECATION")
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
     }
+
+
 }
+
+fun String.underlinedBold(
+    wordToEdit: String,
+    click: ClickableSpan?
+): SpannableString {
+    val spannableString = SpannableString(this)
+    val startPosition = this.indexOf(wordToEdit)
+    val endPosition = this.indexOf(wordToEdit) + wordToEdit.length
+
+
+
+    spannableString.apply {
+
+        setSpan(
+            StyleSpan(Typeface.BOLD),
+            startPosition,
+            endPosition,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        //make the wordToEdit underLined
+        setSpan(
+            UnderlineSpan(),
+            startPosition,
+            endPosition,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        //make the wordToEdit clickable
+        click?.let {
+            setSpan(
+                it,
+                startPosition,
+                endPosition,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+
+        return spannableString
+    }
+}
+
+/**
+ * Extension to navigate to a destination, clearing the current back stack and launching the
+ * fragment as `Single Top`, from the current navigation graph. This supports both navigating via an
+ * {@link NavDestination#getAction(int) action} and directly navigating to a destination.
+ *
+ * @param resId an [androidx.navigation.NavDestination.getAction] id or a destination id to
+ *              navigate to
+ * @param args arguments to pass to the destination
+ */
+fun NavController.navigateSingleTop(@IdRes resId: Int, args: Bundle? = null) {
+    val hostDestinationId = graph.startDestination
+    val navOptions = NavOptions.Builder()
+        .setPopUpTo(hostDestinationId, true)
+        .setLaunchSingleTop(true)
+        .build()
+    navigate(resId, args, navOptions)
+}
+

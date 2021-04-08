@@ -2,12 +2,12 @@ package com.example.booksdonationapp.presentation.commun
 
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.booksdonationapp.core.NetworkState
-
+import com.example.booksdonationapp.presentation.utils.hideKeyBoard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +28,13 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         initView()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (currentFocus != null) {
+            hideKeyBoard()
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     private fun initConnexionListener() {

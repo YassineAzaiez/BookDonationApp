@@ -2,4 +2,25 @@
     <string name="app_name">BooksDonationApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="welcome_descp">Books! I dunno if I ever told you this, but books are the greatest gift one person can give another</string>
+    <string name="welcome_slogan">You’re bound to find more.</string>
+    <string name="login_text">Hi, Folks!</string>
+    <string name="login_email_label">Email</string>
+    <string name="login_password_label">Password</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign Up</string>
+    <string name="forget_password">Forget password?</string>
+
+    <!-- Error messages -->
+    <string name="filedRequired">this is required</string>
+    <string name="invalidEmailErrorMsg">enter a valid email </string>
+    <string name="shortPasswordErrorMsg">password should contains at least 8 characters</string>
+    *
+    <string name="wrongFormatPasswordErrorMsg">wrong password format</string>
+    <string name="name">Name</string>
+    <string name="surname">SurName</string>
+    <string name="phone_number">Phone number</string>
+    <string name="let_s_start">Let\'s start</string>
+    <string name="here_s_your_first_step_with_us">Here’s\nyour first\nstep with us!</string>
 </resources>

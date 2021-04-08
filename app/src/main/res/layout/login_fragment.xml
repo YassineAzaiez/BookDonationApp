@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.login.LoginFragment">
+
+        <ImageView
+            android:id="@+id/ivLoginLogo"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:src="@drawable/ic_splash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineH20" />
+
+        <TextView
+            android:id="@+id/tvLoginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/login_text"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/ivLoginLogo"
+            app:layout_constraintStart_toStartOf="@id/ivLoginLogo"
+            app:layout_constraintTop_toBottomOf="@id/ivLoginLogo" />
+
+        <TextView
+            android:id="@+id/tvNoAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="@string/don_t_have_an_account_sign_up"
+            app:layout_constraintEnd_toEndOf="@id/btn_signIn"
+            app:layout_constraintStart_toStartOf="@id/btn_signIn"
+            app:layout_constraintTop_toBottomOf="@id/btn_signIn" />
+
+        <TextView
+            android:id="@+id/tvForgetPasswor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="@string/forget_password"
+            app:layout_constraintEnd_toEndOf="@id/tvNoAccount"
+            app:layout_constraintStart_toStartOf="@id/tvNoAccount"
+            app:layout_constraintTop_toBottomOf="@id/tvNoAccount" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.20" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineV80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.90" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineV20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.10" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ilEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="12dp"
+            android:hint="@string/login_email_label"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV80"
+            app:layout_constraintStart_toEndOf="@id/guidelineV20"
+            app:layout_constraintTop_toBottomOf="@id/tvLoginText"
+            app:shapeAppearance="@style/Rounded"
+            app:startIconDrawable="@drawable/ic_email"
+            app:startIconTint="@color/pink_f27370">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textNoSuggestions|textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ilPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:hint="@string/login_password_label"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV80"
+            app:layout_constraintStart_toEndOf="@id/guidelineV20"
+            app:layout_constraintTop_toBottomOf="@id/ilEmail"
+            app:passwordToggleDrawable="@drawable/show_hide_password"
+            app:passwordToggleEnabled="true"
+            app:errorIconDrawable="@null"
+            app:shapeAppearance="@style/Rounded"
+            app:startIconDrawable="@drawable/ic_key"
+            app:startIconTint="@color/pink_f27370">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbRememberMe"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/toggle_state"
+            android:backgroundTint="@color/pink_f27370"
+            android:checked="false"
+            android:shadowColor="@android:color/transparent"
+            android:textOff="@null"
+            android:textOn="@null"
+            app:layout_constraintStart_toStartOf="@id/ilPassword"
+            app:layout_constraintTop_toBottomOf="@id/ilPassword" />
+
+        <TextView
+            android:id="@+id/tvRememberMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Remember me"
+            app:layout_constraintBottom_toBottomOf="@id/tbRememberMe"
+            app:layout_constraintStart_toEndOf="@id/tbRememberMe"
+            app:layout_constraintTop_toTopOf="@id/tbRememberMe" />
+
+
+        <Button
+            android:id="@+id/btn_signIn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_for_welcome_screen_singin_btn"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:textColor="#EEE"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/guidelineV80"
+            app:layout_constraintStart_toStartOf="@id/guidelineV20"
+            app:layout_constraintTop_toBottomOf="@id/tbRememberMe" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

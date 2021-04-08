@@ -1,10 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.BooksDonationApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.BooksDonationApp" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+       <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/orange_f3a953</item>
+        <item name="colorSecondaryVariant">@color/orange_f37335</item>
+        <item name="colorOnSecondary">@color/pink_f27370</item>
 
         <!-- Secondary brand color. -->
 
@@ -20,7 +23,10 @@
 <!--        <item name="android:windowFullscreen">true</item>-->
 <!--        <item name="android:windowContentOverlay">@null</item>-->
 <!--        <item name="android:immersive">true</item>-->
+    </style>
 
-
+    <style name="Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
     </style>
 </resources>
