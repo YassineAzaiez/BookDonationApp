@@ -1,15 +1,17 @@
 package com.example.booksdonationapp.presentation.ui.login
 
 import android.text.style.ClickableSpan
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.booksdonationapp.R
+import com.example.booksdonationapp.databinding.LoginFragmentBinding.inflate
 import com.example.booksdonationapp.databinding.LoginFragmentBinding
 import com.example.booksdonationapp.presentation.commun.BaseVmFragment
 import com.example.booksdonationapp.presentation.utils.*
 
-class LoginFragment : BaseVmFragment<LoginViewModel>(LoginViewModel::class.java) {
-    private lateinit var binding: LoginFragmentBinding
+class LoginFragment : BaseVmFragment<LoginViewModel,LoginFragmentBinding>(LoginViewModel::class.java) {
 
 
     override fun initView() {
@@ -20,23 +22,23 @@ class LoginFragment : BaseVmFragment<LoginViewModel>(LoginViewModel::class.java)
             }
 
         }
-        binding.tvNoAccount.text = getString(R.string.don_t_have_an_account_sign_up).underlinedBold(
+        viewBinding.tvNoAccount.text = getString(R.string.don_t_have_an_account_sign_up).underlinedBold(
             getString(R.string.sign_up),
             click
         )
-        binding.tvForgetPasswor.text =
+        viewBinding.tvForgetPasswor.text =
             getString(R.string.forget_password).underlinedBold(
                 getString(R.string.forget_password),
                 click
             )
 
-        binding.btnSignIn.setOnClickListener {
-            if (!binding.ilEmail.removeInputLayoutError()
-                    .isValidEMail(activity, binding.tiEmail.text.toString())
-                    .isNullOrEmpty() and !binding.ilPassword.removeInputLayoutError()
+        viewBinding.btnSignIn.setOnClickListener {
+            if (!viewBinding.ilEmail.removeInputLayoutError()
+                    .isValidEMail(activity, viewBinding.tiEmail.text.toString())
+                    .isNullOrEmpty() and !viewBinding.ilPassword.removeInputLayoutError()
                     .isValidPassword(
                         activity,
-                        binding.tiPassword.text.toString()
+                        viewBinding.tiPassword.text.toString()
                     ).isNullOrEmpty()
             ) {
                 findNavController().navigateSingleTop(
@@ -51,13 +53,14 @@ class LoginFragment : BaseVmFragment<LoginViewModel>(LoginViewModel::class.java)
 
     }
 
-    override fun getLayoutResId(): View {
-        binding = LoginFragmentBinding.inflate(layoutInflater)
-        return binding.root
-    }
+
 
     override fun initData() {
 
+    }
+
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?): LoginFragmentBinding {
+        return inflate(inflater , container , false)
     }
 
 }

@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.booksdonationapp"
-        minSdkVersion 26
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -68,6 +68,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+
     //hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
@@ -88,6 +89,9 @@ dependencies {
     //stetho
     implementation "com.facebook.stetho:stetho:$stetho_version"
     implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
+
+    //security crypto
+    implementation "androidx.security:security-crypto:$crypto_version"
 
 
 }

@@ -8,12 +8,13 @@ buildscript {
         recylerView_version = "1.0.0"
         lifecycle_version = "2.3.0"
         room_version = "2.2.6"
-        nav_version = "2.3.3"
+        nav_version = "2.3.4"
         hilt_version = "2.33-beta"
         coil_version = "1.1.1"
         gson_version = "2.8.6"
         okhtpp_version = "4.4.0"
         stetho_version="1.5.1"
+        crypto_version = "1.0.0-rc04"
 
 
     }

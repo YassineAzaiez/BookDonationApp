@@ -1,10 +1,11 @@
-package com.example.gamehub.commen.ui
+package com.example.booksdonationapp.presentation.commun
 
 import android.os.Bundle
-import com.example.booksdonationapp.presentation.commun.BaseActivity
+import androidx.viewbinding.ViewBinding
+import com.example.gamehub.commen.ui.BaseViewModel
 
 
-abstract class BaseVmActivity<VM : BaseViewModel>(private val modelClass: Class<VM>) :
+abstract class BaseVmActivity<VM : BaseViewModel, VB : ViewBinding>(private val modelClass: Class<VM>) :
     BaseActivity() {
 
    private lateinit var  viewModel: VM

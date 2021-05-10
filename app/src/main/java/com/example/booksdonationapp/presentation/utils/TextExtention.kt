@@ -9,6 +9,7 @@ import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
 
 const val PASSWORD_PATTERN = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+const val LETTERS_ONLY_PATTERN = "^[a-z A-Z &]+\$"
 
 fun TextInputLayout.isValidEMail(
     context: Context,
@@ -44,6 +45,20 @@ fun TextInputLayout.isValidPassword(
         )
         ""
     } else password
+}
+
+fun TextInputLayout.validInputStringOnly(
+    context: Context,
+    input : String
+) :String{
+    val pattern = Pattern.compile(LETTERS_ONLY_PATTERN)
+    return if(TextUtils.isEmpty(input)){
+        setInputErrorMsg(this, context.getString(R.string.filedRequired))
+        ""
+    }else if(!pattern.matcher(input).matches() && !TextUtils.isEmpty(input)){
+        setInputErrorMsg(this, context.getString(R.string.lettersOnlyErrorMsg))
+        ""
+    }else input
 }
 
 private fun setInputErrorMsg(

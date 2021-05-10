@@ -16,6 +16,7 @@
     <string name="filedRequired">this is required</string>
     <string name="invalidEmailErrorMsg">enter a valid email </string>
     <string name="shortPasswordErrorMsg">password should contains at least 8 characters</string>
+    <string name="lettersOnlyErrorMsg">you should enter letters only</string>
     *
     <string name="wrongFormatPasswordErrorMsg">wrong password format</string>
     <string name="name">Name</string>
@@ -23,4 +24,7 @@
     <string name="phone_number">Phone number</string>
     <string name="let_s_start">Let\'s start</string>
     <string name="here_s_your_first_step_with_us">Here’s\nyour first\nstep with us!</string>
+    <string name="connection_off">connection off, try to reconnect..!</string>
+    <string name="night_mode">Night mode</string>
+    <string name="settings">settings</string>
 </resources>

@@ -1,12 +1,14 @@
 package com.example.booksdonationapp.presentation.ui.feeds
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.example.booksdonationapp.databinding.FeedsFragmentBinding
+import com.example.booksdonationapp.databinding.FeedsFragmentBinding.*
 import com.example.booksdonationapp.presentation.commun.BaseVmFragment
 
-class FeedsFragment : BaseVmFragment<FeedsViewModel>(FeedsViewModel::class.java) {
+class FeedsFragment : BaseVmFragment<FeedsViewModel,FeedsFragmentBinding>(FeedsViewModel::class.java) {
 
-    private lateinit var binding: FeedsFragmentBinding
 
 
     override fun startObserve() {
@@ -21,10 +23,8 @@ class FeedsFragment : BaseVmFragment<FeedsViewModel>(FeedsViewModel::class.java)
 
     }
 
-
-    override fun getLayoutResId(): View {
-        binding = FeedsFragmentBinding.inflate(layoutInflater)
-        return binding.root
+    override fun createView(inflater: LayoutInflater, container: ViewGroup?): FeedsFragmentBinding {
+        return  inflate(inflater,container,false)
     }
 
 

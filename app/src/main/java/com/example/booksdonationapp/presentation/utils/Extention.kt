@@ -20,7 +20,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -54,8 +56,15 @@ fun Context.getColor(@ColorRes colorRes : Int) : Int {
     return  ContextCompat.getColor(this,colorRes)
 }
 
-fun Context.getDrawable(@DrawableRes drawableRes : Int) : Drawable? {
-    return  ContextCompat.getDrawable(this,drawableRes)
+val Fragment.screenHeight: Int
+    get() = activity?.resources?.displayMetrics?.heightPixels ?: 0
+
+fun Context.getDrawable(@DrawableRes drawableRes: Int): Drawable? {
+    return ContextCompat.getDrawable(this, drawableRes)
+}
+
+fun Context.readText(@StringRes resId: Int): String {
+    return getString(resId)
 }
 
 fun Activity.hideKeyBoard() {
@@ -81,7 +90,8 @@ inline fun <reified T : Any> Activity.startActivity(
 ) {
     val intent = newIntent<T>(this)
     intent.init()
-    startActivity(intent,options)
+    startActivity(intent, options)
+    finish()
 }
 
 inline fun <reified T : Any> newIntent(context: Context): Intent = Intent(context, T::class.java)

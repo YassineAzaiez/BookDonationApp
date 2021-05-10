@@ -10,5 +10,14 @@
         android:id="@+id/FeedsFragment"
         android:name="com.example.booksdonationapp.presentation.ui.feeds.FeedsFragment"
         android:label="Feeds"
-        tools:layout="@layout/feeds_fragment" />
+        tools:layout="@layout/feeds_fragment" >
+        <action
+            android:id="@+id/action_FeedsFragment_to_filterSettingsDialogFragment"
+            app:destination="@id/filterSettingsDialogFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/filterSettingsDialogFragment"
+        android:name="com.example.booksdonationapp.presentation.ui.setting.SettingBottomSheet"
+        tools:layout="@layout/fragment_setting_bottom_sheet" />
 </navigation>

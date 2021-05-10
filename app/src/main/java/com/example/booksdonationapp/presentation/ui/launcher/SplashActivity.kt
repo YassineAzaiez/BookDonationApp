@@ -10,14 +10,14 @@ import com.example.booksdonationapp.databinding.ActivitySplashBinding
 import com.example.booksdonationapp.presentation.MainActivity
 import com.example.booksdonationapp.presentation.utils.hideSystemUI
 import com.example.booksdonationapp.presentation.utils.startActivity
-import com.example.gamehub.commen.ui.BaseVmActivity
+import com.example.booksdonationapp.presentation.commun.BaseVmActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class SplashActivity : BaseVmActivity<SplashViewModel>(SplashViewModel::class.java) {
+class SplashActivity : BaseVmActivity<SplashViewModel, ActivitySplashBinding>(SplashViewModel::class.java) {
 
 
     private val SPLASH_TIME_OUT_SPLACH: Long = 4000

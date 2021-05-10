@@ -7,23 +7,25 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.example.booksdonationapp.R
 import com.example.booksdonationapp.databinding.ActivityMainBinding
 import com.example.booksdonationapp.presentation.commun.BaseActivity
 import com.example.booksdonationapp.presentation.ui.feeds.FeedsFragment
+import com.example.booksdonationapp.presentation.ui.launcher.WelcomeFragment
+import com.example.booksdonationapp.presentation.ui.login.LoginFragment
+import com.example.booksdonationapp.presentation.ui.registration.RegistrationFragment
 import com.example.booksdonationapp.presentation.utils.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
-    private val isConnected = false
+    private val isConnected = true
     private lateinit var navHostFragment: NavHostFragment
-    private lateinit var appBarConfiguration: AppBarConfiguration
+
 
     override fun getLayoutId(): View {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,7 +50,7 @@ class MainActivity : BaseActivity() {
                     is FeedsFragment -> {
                         showNavigation()
                     }
-                    else -> {
+                    is LoginFragment, is WelcomeFragment, is RegistrationFragment -> {
                         hideNavigation()
                     }
                 }
@@ -57,12 +59,15 @@ class MainActivity : BaseActivity() {
 
 
         if (isConnected) {
-            navHostFragment.findNavController().setGraph(R.navigation.home_graph)
+            navController.setGraph(R.navigation.home_graph)
 
         } else {
-            navHostFragment.findNavController().setGraph(R.navigation.start_up_graph)
+            navController.setGraph(R.navigation.start_up_graph)
         }
         binding.bottomNavigationView.background = null
+        binding.settingsIcon.setOnClickListener {
+//            navController.navigate(R.id.action_FeedsFragment_to_filterSettingsDialogFragment)
+        }
     }
 
     override fun initData() {

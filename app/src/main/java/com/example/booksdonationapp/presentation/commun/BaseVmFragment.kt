@@ -1,18 +1,24 @@
 package com.example.booksdonationapp.presentation.commun
 
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.booksdonationapp.presentation.MainActivity
+import androidx.viewbinding.ViewBinding
 import com.example.gamehub.commen.ui.BaseViewModel
 
 
-abstract class BaseVmFragment<VM : BaseViewModel>(private val modelClass: Class<VM>) : Fragment() {
+abstract class BaseVmFragment<VM : BaseViewModel, VB : ViewBinding>(private val modelClass: Class<VM>) :
+    Fragment() {
 
+    private var _viewBinding: VB? = null
+
+    protected val viewBinding: VB
+        get() = _viewBinding!!
 
     protected lateinit var activity: BaseActivity
     override fun onAttach(context: Context) {
@@ -25,7 +31,9 @@ abstract class BaseVmFragment<VM : BaseViewModel>(private val modelClass: Class<
 
     lateinit var viewModel: VM
 
-    abstract fun getLayoutResId(): View
+    abstract fun createView(inflater: LayoutInflater, container: ViewGroup?): VB
+
+
 
     abstract fun initData()
 
@@ -36,8 +44,13 @@ abstract class BaseVmFragment<VM : BaseViewModel>(private val modelClass: Class<
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+     _viewBinding = createView(inflater,container)
+        return _viewBinding?.root
+    }
 
-        return getLayoutResId()
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        this.activity = context as BaseActivity
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
