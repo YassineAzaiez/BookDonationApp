@@ -15,7 +15,7 @@ buildscript {
         okhtpp_version = "4.4.0"
         stetho_version="1.5.1"
         crypto_version = "1.0.0-rc04"
-
+        viewPagerIndicator = "1.0.4"
 
     }
     repositories {
@@ -35,8 +35,12 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
+
+
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

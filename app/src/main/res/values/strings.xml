@@ -27,4 +27,6 @@
     <string name="connection_off">connection off, try to reconnect..!</string>
     <string name="night_mode">Night mode</string>
     <string name="settings">settings</string>
+    <string name="continue_txt">Continue</string>
+    <string name="add_book">Add a book</string>
 </resources>

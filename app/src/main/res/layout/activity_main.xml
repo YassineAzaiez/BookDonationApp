@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:backgroundTint="@color/colorPrimaryDark"
-        app:fabCradleMargin="15dp"
+        app:fabCradleMargin="8dp"
         app:fabCradleRoundedCornerRadius="15dp"
         app:fabCradleVerticalOffset="10dp">
 
@@ -95,7 +95,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/createBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"

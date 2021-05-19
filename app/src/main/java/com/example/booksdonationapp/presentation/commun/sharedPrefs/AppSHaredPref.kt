@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder
 const val USER = "user"
 const val IS_CONNECTED = "is_connected"
 const val NIGHT_THEME_PREFERENCE = "night_theme_preference"
+const val IS_LOGGED_IN = "isLoggedIn"
 
 class AppSHaredPref(context: Context) {
 
@@ -26,6 +27,10 @@ class AppSHaredPref(context: Context) {
     var nightThemePref: Boolean
         get() = pref.getBoolean(NIGHT_THEME_PREFERENCE, false)
         set(value) = pref.edit().putBoolean(NIGHT_THEME_PREFERENCE, value).apply()
+
+    var isLoggedIn: Boolean
+        get() = pref.getBoolean(IS_LOGGED_IN, false)
+        set(value) = pref.edit().putBoolean(IS_LOGGED_IN, value).apply()
 
 
 }

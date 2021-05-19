@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -65,9 +66,7 @@ class MainActivity : BaseActivity() {
             navController.setGraph(R.navigation.start_up_graph)
         }
         binding.bottomNavigationView.background = null
-        binding.settingsIcon.setOnClickListener {
-//            navController.navigate(R.id.action_FeedsFragment_to_filterSettingsDialogFragment)
-        }
+        initClickListen()
     }
 
     override fun initData() {
@@ -78,7 +77,7 @@ class MainActivity : BaseActivity() {
     fun hideNavigation() {
         binding.bottomNavigationView.gone()
         binding.bottomAppBar.gone()
-        binding.fab.gone()
+        binding.createBook.gone()
         hideActionBar()
     }
 
@@ -89,7 +88,7 @@ class MainActivity : BaseActivity() {
     fun showNavigation() {
         binding.bottomNavigationView.visible()
         binding.bottomAppBar.visible()
-        binding.fab.visible()
+        binding.createBook.visible()
         showActionBar()
     }
 
@@ -107,7 +106,7 @@ class MainActivity : BaseActivity() {
             navController
         )
 
-        ToolbarShared.getInstance().toolbarTitle.reObserve(this, {
+        ToolbarShared.getInstance().toolbarTitle.reObserve(this, Observer {
             updateToolbarTitle(it)
         })
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -130,5 +129,15 @@ class MainActivity : BaseActivity() {
         }
         hideKeyBoard()
 
+    }
+
+    private fun initClickListen() {
+        binding.settingsIcon.setOnClickListener {
+//            navController.navigate(R.id.action_FeedsFragment_to_filterSettingsDialogFragment)
+        }
+
+        binding.createBook.setOnClickListener {
+            navController.navigate(R.id.action_FeedsFragment_to_CreateBookFragment)
+        }
     }
 }
