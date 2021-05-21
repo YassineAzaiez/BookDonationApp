@@ -23,17 +23,24 @@ import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.booksdonationapp.presentation.commun.BaseActivity
+import kotlin.reflect.KClass
 
 fun <T> LiveData<T>.reObserve(owner: LifecycleOwner , observer: Observer<T>){
     removeObserver(observer)
     observe(owner,observer)
+}
+
+inline fun <T : ViewModel> BaseActivity.viewModelProvider(
+    factory: ViewModelProvider.Factory,
+    model: KClass<T>
+): T {
+    return ViewModelProvider(this, factory)[model.java]
 }
 
 fun RecyclerView.loadMore(load : () ->Unit){

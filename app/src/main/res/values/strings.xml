@@ -29,4 +29,8 @@
     <string name="settings">settings</string>
     <string name="continue_txt">Continue</string>
     <string name="add_book">Add a book</string>
+    <string name="sell">Sell</string>
+    <string name="buy">Buy</string>
+    <string name="swap">Swap</string>
+    <string name="book_name">Book name</string>
 </resources>

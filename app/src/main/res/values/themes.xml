@@ -25,7 +25,16 @@
 <!--        <item name="android:immersive">true</item>-->
     </style>
 
+<style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+    <item name="chipBackgroundColor">@color/chip_selection_color</item>
+<!--    <item name="android:textColor">@color/chip_selection_text_color</item>-->
+    <item name="android:layout_width">100dp</item>
+    <item name="android:layout_height">55dp</item>
+    <item name="android:textAlignment">center</item>
+    <item name="android:elevation">5dp</item>
+    <item name="android:checked">false</item>
 
+</style>
 
     <style name="Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>

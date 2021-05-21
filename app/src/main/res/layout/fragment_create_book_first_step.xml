@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tvWantTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I want to "
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/guidLineV5"
+        app:layout_constraintTop_toBottomOf="@id/guidLineH20" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLineV5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:selectionRequired="true"
+        app:singleSelection="true"
+        app:layout_constraintEnd_toStartOf="@id/guidLineV95"
+        app:layout_constraintStart_toEndOf="@id/guidLineV5"
+        app:layout_constraintTop_toBottomOf="@id/tvWantTo">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chipsGroupLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSell"
+                style="@style/ChipStyle"
+                android:layout_marginStart="10dp"
+                android:tag="@string/sell"
+                android:text="@string/sell"
+                app:layout_constraintEnd_toStartOf="@+id/chipBuy"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipBuy"
+                style="@style/ChipStyle"
+                android:tag="@string/buy"
+                android:text="@string/buy"
+                app:layout_constraintEnd_toStartOf="@+id/chipSwap"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/chipSell"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSwap"
+                style="@style/ChipStyle"
+                android:layout_marginEnd="10dp"
+                android:tag="@string/swap"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/chipBuy"
+                android:text="@string/swap"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.chip.ChipGroup>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLineH20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidLineV95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ilBookName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/book_name"
+        app:layout_constraintEnd_toStartOf="@id/guidLineV95"
+        app:layout_constraintStart_toEndOf="@id/guidLineV5"
+        app:layout_constraintTop_toBottomOf="@id/chipGroup"
+        app:shapeAppearance="@style/Rounded">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiBookName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ilBookAuthor"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Author"
+        app:layout_constraintEnd_toStartOf="@id/guidLineV95"
+        app:layout_constraintStart_toEndOf="@id/guidLineV5"
+        app:layout_constraintTop_toBottomOf="@id/ilBookName"
+        app:shapeAppearance="@style/Rounded">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiBookAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ilBookPages"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Pages"
+        app:layout_constraintEnd_toStartOf="@id/guidLineV95"
+        app:layout_constraintStart_toEndOf="@id/guidLineV5"
+        app:layout_constraintTop_toBottomOf="@id/ilBookAuthor"
+        app:shapeAppearance="@style/Rounded">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiBookPages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ilBookPrice"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Price"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/guidLineV95"
+        app:layout_constraintStart_toEndOf="@id/guidLineV5"
+        app:layout_constraintTop_toBottomOf="@id/ilBookPages"
+        app:shapeAppearance="@style/Rounded">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiBookPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

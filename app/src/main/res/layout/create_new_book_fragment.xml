@@ -6,18 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.createBook.CreateNewBookFragment">
 
+    <ImageView
+        android:id="@+id/ivPrevious"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_previous"
+        app:layout_constraintStart_toEndOf="@id/guidelineV5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorPrimary" />
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="@string/add_book"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@id/guidelineV5"
+        app:layout_constraintTop_toBottomOf="@id/ivPrevious"/>
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/bookCreationPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.zhpan.indicator.IndicatorView
         android:id="@+id/viewPagerIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/btnContinue"
         app:layout_constraintStart_toEndOf="@id/guidelineV5"
-        app:layout_constraintTop_toTopOf="@id/btnContinue" />
+        app:layout_constraintTop_toTopOf="@id/btnContinue"
+        app:layout_constraintBottom_toBottomOf="@id/btnContinue" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV5"

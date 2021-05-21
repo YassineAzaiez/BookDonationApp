@@ -25,6 +25,9 @@
         android:label="Create book"
         tools:layout="@layout/feeds_fragment" >
 
+        <action
+            android:id="@+id/action_CreateBookFragment_to_FeedsFragment"
+            app:destination="@id/FeedsFragment" />
     </fragment>
 
     <dialog

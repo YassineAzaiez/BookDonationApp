@@ -79,8 +79,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:backgroundTint="@color/colorPrimaryDark"
+        style="@style/Widget.MaterialComponents.BottomAppBar"
         app:fabCradleMargin="8dp"
-        app:fabCradleRoundedCornerRadius="15dp"
+        app:fabCradleRoundedCornerRadius="8dp"
         app:fabCradleVerticalOffset="10dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
