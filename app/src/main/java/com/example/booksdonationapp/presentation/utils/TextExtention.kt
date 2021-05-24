@@ -1,9 +1,12 @@
 package com.example.booksdonationapp.presentation.utils
 
 import android.content.Context
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
+import android.widget.TextView
 import com.example.booksdonationapp.R
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
@@ -81,4 +84,21 @@ private fun setInputErrorMsg(
         }
     }
     return this
+}
+fun TextView.onTextChange(toDo : ()->Unit) {
+          this.addTextChangedListener(object : TextWatcher {
+              override fun afterTextChanged(s: Editable?) {
+
+              }
+
+              override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                  TODO("Not yet implemented")
+              }
+
+              override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                  toDo()
+              }
+
+          })
+
 }

@@ -5,25 +5,26 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.booksdonationapp.R
 import com.example.booksdonationapp.databinding.FragmentCreateBookFirstStepBinding
 import com.example.booksdonationapp.databinding.FragmentCreateBookFirstStepBinding.inflate
 import com.example.booksdonationapp.presentation.commun.BaseVmFragment
+import com.example.booksdonationapp.presentation.utils.SharedUtils
 import com.example.booksdonationapp.presentation.utils.gone
-import com.example.booksdonationapp.presentation.utils.reObserve
 import com.example.booksdonationapp.presentation.utils.readText
 import com.example.booksdonationapp.presentation.utils.visible
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
+
 
 class BookCreationFirstStep(private val goNext: () -> Unit) :
     BaseVmFragment<CreateNewBookViewModel, FragmentCreateBookFirstStepBinding>(
         CreateNewBookViewModel::class.java
     ) {
 
-    val vModel: CreateNewBookViewModel by viewModels()
+    private val vModel: CreateNewBookViewModel by viewModels()
     override fun createView(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -38,71 +39,68 @@ class BookCreationFirstStep(private val goNext: () -> Unit) :
     override fun initView() {
         viewModel = vModel
         setCheckListener(viewBinding.chipsGroupLayout)
+
     }
 
     override fun startObserve() {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.goNextTrigger.collect {
-                when(it){
-                    is MyEvent.GoToNExtEvent ->{
-                        if(it.event)
-                            goNext()
+
+            SharedUtils.getInstance().goToNextEvent.collect { it ->
+                when (it) {
+                    is MyEvent.GoToNextEvent -> {
+                        if (it.event) goNext()
+
+
+
+
                     }
                 }
+
             }
-        }
-//        viewModel.goNextTrigger.observe(viewLifecycleOwner, Observer {
-//            when (it) {
-//                is MyEvent.GoToNExtEvent -> {
-//                    if (it.event) goNext()
-//                }
-//            }
-//        })
-
-
-    }
-
-    private fun getChipsIds(chipGroup: ConstraintLayout): List<Int> {
-        var chipsIds = ArrayList<Int>()
-        chipGroup.forEach { view ->
-            if (view is Chip) {
-                chipsIds.add(view.id)
+        }}
+            private fun getChipsIds(chipGroup: ConstraintLayout): List<Int> {
+                var chipsIds = ArrayList<Int>()
+                chipGroup.forEach { view ->
+                    if (view is Chip) {
+                        chipsIds.add(view.id)
+                    }
+                }
+                return chipsIds
             }
-        }
-        return chipsIds
-    }
 
 
-    private fun setCheckListener(chipGroup: ConstraintLayout) {
-        chipGroup.forEach { view ->
-            if (view is Chip) {
+            private fun setCheckListener(chipGroup: ConstraintLayout) {
+                chipGroup.forEach { view ->
+                    if (view is Chip) {
 
-                view.setOnCheckedChangeListener { chip, isChecked ->
+                        view.setOnCheckedChangeListener { chip, isChecked ->
 
-                    val chipsIds = getChipsIds(chipGroup)
+                            val chipsIds = getChipsIds(chipGroup)
 
-                    view.setOnClickListener {
-                        chipsIds.forEachIndexed { index, i ->
+                            view.setOnClickListener {
+                                chipsIds.forEachIndexed { index, i ->
 
-                            (chipGroup.getChildAt(index) as Chip).isChecked = chip.id == i
+                                    (chipGroup.getChildAt(index) as Chip).isChecked = chip.id == i
+
+
+                                }
+                                if (isChecked && chip.tag.toString() == viewBinding.root.context.readText(
+                                        R.string.sell
+                                    )
+                                ) {
+                                    viewBinding.ilBookPrice.visible()
+                                } else {
+                                    viewBinding.ilBookPrice.gone()
+                                }
+                            }
 
 
                         }
-                        if (isChecked && chip.tag.toString() == viewBinding.root.context.readText(R.string.sell)) {
-                            viewBinding.ilBookPrice.visible()
-                        } else {
-                            viewBinding.ilBookPrice.gone()
-                        }
+
+
                     }
-
-
                 }
+            }}
 
 
-            }
-        }
-    }
-
-
-}

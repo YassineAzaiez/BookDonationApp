@@ -14,14 +14,14 @@ import com.example.booksdonationapp.databinding.CreateNewBookFragmentBinding.inf
 import com.example.booksdonationapp.presentation.MainActivity
 import com.example.booksdonationapp.presentation.commun.BaseVmFragment
 import com.example.booksdonationapp.presentation.ui.createBook.adapter.BookCreationAdapter
+import com.example.booksdonationapp.presentation.utils.SharedUtils
 import com.zhpan.indicator.enums.IndicatorSlideMode.Companion.WORM
-import dagger.hilt.android.AndroidEntryPoint
 
 class CreateNewBookFragment :
     BaseVmFragment<CreateNewBookViewModel, CreateNewBookFragmentBinding>(CreateNewBookViewModel::class.java) {
     private val creationSteps = listOf<Fragment>(
         BookCreationFirstStep { goToNextPage() },
-        BookCreationFirstStep { goToNextPage() },
+       BookCreationSecondStep { goToNextPage() },
         BookCreationFirstStep { goToNextPage() }
     )
     val vModel: CreateNewBookViewModel by viewModels()
@@ -86,8 +86,14 @@ class CreateNewBookFragment :
         }
 
         viewBinding.btnContinue.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 
-                viewModel.triggerGoNextEvent()
+                SharedUtils.getInstance().sendGoToNext()
+
+
+
+            }
+
 
 
 
@@ -105,7 +111,7 @@ class CreateNewBookFragment :
     private fun goToPreviousPage() {
         when (viewPagerPostion) {
             1, 2 -> viewBinding.bookCreationPager.currentItem = viewPagerPostion.dec()
-            else -> findNavController().navigate(R.id.action_CreateBookFragment_to_FeedsFragment)
+            else -> findNavController().popBackStack()
         }
     }
 }

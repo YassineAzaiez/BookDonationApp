@@ -36,6 +36,7 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         setUpNav()
+        binding.createBook.bringToFront()
 
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(object :
@@ -106,7 +107,7 @@ class MainActivity : BaseActivity() {
             navController
         )
 
-        ToolbarShared.getInstance().toolbarTitle.reObserve(this, Observer {
+        SharedUtils.getInstance().toolbarTitle.reObserve(this, Observer {
             updateToolbarTitle(it)
         })
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -135,7 +136,6 @@ class MainActivity : BaseActivity() {
         binding.settingsIcon.setOnClickListener {
 //            navController.navigate(R.id.action_FeedsFragment_to_filterSettingsDialogFragment)
         }
-
         binding.createBook.setOnClickListener {
             navController.navigate(R.id.action_FeedsFragment_to_CreateBookFragment)
         }

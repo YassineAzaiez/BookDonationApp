@@ -12,11 +12,14 @@ import androidx.viewbinding.ViewBinding
 import com.example.booksdonationapp.core.NetworkState
 import com.example.booksdonationapp.presentation.utils.customViews.SnackBarManager
 import com.example.booksdonationapp.presentation.utils.hideKeyBoard
+import com.example.booksdonationapp.presentation.utils.permission.PermissionsUtils
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 
 @AndroidEntryPoint
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() ,EasyPermissions.PermissionCallbacks{
 
     abstract fun getLayoutId(): View
     abstract fun initView()
@@ -54,5 +57,25 @@ abstract class BaseActivity : AppCompatActivity() {
         })
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
 
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this).build().show()
+        } else {
+            PermissionsUtils().requestDeniedPermission(this, requestCode)
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+
+    }
 }
