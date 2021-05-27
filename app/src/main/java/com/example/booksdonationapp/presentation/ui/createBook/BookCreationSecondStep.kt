@@ -1,33 +1,51 @@
 package com.example.booksdonationapp.presentation.ui.createBook
 
 import android.location.Address
-import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.booksdonationapp.R
 import com.example.booksdonationapp.databinding.BookCreationSecondStepBinding
 import com.example.booksdonationapp.databinding.BookCreationSecondStepBinding.inflate
 import com.example.booksdonationapp.presentation.commun.BaseVmFragment
-import com.example.booksdonationapp.presentation.utils.hideKeyBoard
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import okhttp3.OkHttpClient
+import com.mustufamedium.geocoderexample.ResponseStatus
 
 
 class BookCreationSecondStep(goNext: () -> Unit) :
     BaseVmFragment<CreateNewBookViewModel, BookCreationSecondStepBinding>(CreateNewBookViewModel::class.java),
-    OnMapReadyCallback {
-    private val TUNISA_LOCATION = LatLng(33.8869, 9.5375)
-    private lateinit var googleMap: GoogleMap
+    OnMapReadyCallback, GoogleMap.OnCameraIdleListener {
+    private var TUNISA_LOCATION = LatLng(33.8869, 9.5375)
+    private lateinit var mGoogleMap: GoogleMap
     lateinit var address: String
-   // private val coder = Geocoder(requireContext())
+    private val vModel: CreateNewBookViewModel by viewModels()
+    // private val coder = Geocoder(requireContext())
 
     override fun startObserve() {
+        viewModel.getLocationInformation.observe(this, Observer {
+            it?.let {
+                when (it.status) {
+                    ResponseStatus.ERROR -> {
+                       viewBinding.tiUserAdr.setText("Location not found!")
+                    }
+                    ResponseStatus.LOADING -> {
+                        viewBinding.tiUserAdr.setText("Searching...")
+                    }
+                    ResponseStatus.SUCCESS -> {
+                        it.data?.let { model ->
+                            viewBinding.tiUserAdr.setText(model.locationAddress)
 
+                        }
+                    }
+                }
+            }
+        })
     }
 
     override fun createView(
@@ -42,10 +60,7 @@ class BookCreationSecondStep(goNext: () -> Unit) :
     }
 
     override fun initView() {
-        viewBinding.tvTarget.setOnClickListener {
-            activity.hideKeyBoard()
-            address = viewBinding.tiUserAdr.toString()
-        }
+        viewModel = vModel
         initMapView()
     }
 
@@ -58,20 +73,36 @@ class BookCreationSecondStep(goNext: () -> Unit) :
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        this.googleMap = googleMap
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(TUNISA_LOCATION, 6.2F))
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(LatLng(0.0, 0.0))
-                .title("Marker")
-        )
+        this.mGoogleMap = googleMap
+        this.mGoogleMap.clear()
+        moveCamera()
+        mGoogleMap.setOnCameraIdleListener(this)
+
+    }
+
+    private fun moveCamera() {
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(TUNISA_LOCATION, 6.2F))
     }
 
     private fun setMarkerOnMap(address: Address) {
-        googleMap.addMarker(
+        mGoogleMap.addMarker(
             MarkerOptions()
                 .position(LatLng(address.latitude, address.longitude))
                 .title(viewBinding.tiUserAdr.toString())
         )
+    }
+
+    override fun onCameraIdle() {
+        mGoogleMap?.let {
+            it.cameraPosition?.let { position ->
+                TUNISA_LOCATION = mGoogleMap?.cameraPosition!!.target
+                viewModel.getLocationInfo(
+                    activity,
+                    TUNISA_LOCATION.latitude.toString(),
+                    TUNISA_LOCATION.longitude.toString()
+                )
+            }
+
+        }
     }
 }

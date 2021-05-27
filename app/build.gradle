@@ -102,5 +102,5 @@ dependencies {
     //easyPermission
     implementation 'pub.devrel:easypermissions:3.0.0'
 
-
+    api 'org.apache.commons:commons-lang3:3.8'
 }
